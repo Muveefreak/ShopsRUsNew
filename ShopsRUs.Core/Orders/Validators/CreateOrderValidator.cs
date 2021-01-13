@@ -25,13 +25,13 @@ namespace ShopsRUs.Core.Orders.Validators
             RuleFor(x => x.OrderStatus)
                 .NotEmpty().WithMessage("Order Status is required.");
 
-            //RuleFor(x => x.OrderStatus)
-            //    .Must(x => join.Contains(x))
-            //    .WithMessage($"Please only pass: {join} as Is Order Type.");
+            RuleFor(x => x.OrderStatus)
+                .Must(x => join.Contains(x))
+                .WithMessage($"Please only pass: {join} as Is Order Type.");
 
             RuleFor(x => x.Amount)
                 .NotEmpty().WithMessage("Amount is required.")
-                .GreaterThan(0).WithMessage("Amount must be greater than 0");
+                .GreaterThan(0).WithMessage("Amount is required and must be greater than 0");
         }
     }
 }

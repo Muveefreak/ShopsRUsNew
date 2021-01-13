@@ -15,6 +15,8 @@ using ShopsRUs.Api.Configuration;
 using ShopsRUs.Api.Filters;
 using ShopsRUs.Core.Configuration;
 using ShopsRUs.Core.Customers.Validators;
+using ShopsRUs.Core.Discounts.Validators;
+using ShopsRUs.Core.Orders.Validators;
 using ShopsRUs.Infrastructure.Configuration;
 
 namespace ShopsRUs.Api
@@ -37,7 +39,12 @@ namespace ShopsRUs.Api
 
             services
                 .AddMvc(options => { options.Filters.Add<ValidationFilter>(); })
-                .AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<CreateCustomerValidator>())
+                .AddFluentValidation(config =>
+                {
+                    config.RegisterValidatorsFromAssemblyContaining<CreateCustomerValidator>();
+                    config.RegisterValidatorsFromAssemblyContaining<CreateOrderValidator>();
+                    config.RegisterValidatorsFromAssemblyContaining<CreateDiscountValidator>();
+                })
                 ;
 
             services

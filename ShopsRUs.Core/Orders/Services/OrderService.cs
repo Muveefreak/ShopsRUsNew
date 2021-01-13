@@ -85,55 +85,76 @@ namespace ShopsRUs.Core.Orders.Services
         public List<OrderResponse> Orders { get; set; }
         public CustomerResponse Customer { get; set; }
         public List<DiscountResponse> Discounts { get; set; }
+        private float totalSum { get; set; }
 
 
 
         public float GetDiscountedTotal()
         {
-            var totalSum = Orders.Sum(x => x.Amount);
+            this.totalSum = Orders.Sum(x => x.Amount);
             float totalDiscountedAmount = 0f;
             float totalDiscountForPercentage = 0f;
             float totalDiscountForNonPercentage = 0f;
 
             var customerDiscount = Discounts.FirstOrDefault(x => x.DiscountType.ToLower().Trim() == Customer.CustomerType.ToLower().Trim());
 
-            int percentageCount = 0; // Number Of Percentage Discounts Customer Qualifies For
-            // customer Type Discount ie Affilliate or Employee
-            if (customerDiscount != null && customerDiscount.IsPercentageType == "Y" && percentageCount == 0) 
-            {
-                percentageCount++;
-                foreach (var order in Orders)
-                {
-                    if (order.OrderType.ToLower() != "groceries")
-                    {
-                        var discountedAmount = order.Amount * ((float)customerDiscount.DiscountPercent / 100);
-                        totalDiscountForPercentage += discountedAmount;
-                    }
-                }
-            }
-            // Loyalty Discount
-            if (Customer.GetAge() > 2 && customerDiscount.IsPercentageType == "Y" && percentageCount == 0)
-            {
-                percentageCount++;
-                foreach (var order in Orders)
-                {
-                    if (order.OrderType.ToLower() != "groceries")
-                    {
-                        var discountedAmount = order.Amount * ((float)customerDiscount.DiscountPercent / 100);
-                        totalDiscountForPercentage += discountedAmount;
-                    }
-                }
-            }
+            if(customerDiscount.IsPercentageType == "Y")
+            totalDiscountForPercentage = GetDiscountForPercentage(customerDiscount); // Get Discount Sum from Percentage discount
 
-            // Discount Price break
-            var discountType = "price break";
-            var constantDiscount = Discounts.FirstOrDefault(x => x.DiscountType.ToLower().Trim() == discountType.ToLower().Trim());
+            
+            totalDiscountForNonPercentage = GetDiscountForNonPercentage(customerDiscount); // Get Discount Sum from Non Percentage discount
 
-            var valInHundreds = (float)Math.Floor((decimal)totalSum / 100);
-            totalDiscountForNonPercentage = (float)constantDiscount.DiscountAmount * valInHundreds;
 
             totalDiscountedAmount = totalSum - (totalDiscountForNonPercentage + totalDiscountForPercentage);
             return totalDiscountedAmount;
+        }
+
+        public float GetDiscountForNonPercentage(DiscountResponse customerDiscount)
+        {
+            // Discount Price break
+            float totalDiscountForNonPercentage = 0f;
+            var discountType = "price break";
+            var constantDiscount = Discounts.FirstOrDefault(x => x.DiscountType.ToLower().Trim() == discountType.ToLower().Trim());
+
+            var valInHundreds = (float)Math.Floor((decimal)this.totalSum / 100);
+            totalDiscountForNonPercentage = (float)constantDiscount.DiscountAmount * valInHundreds;
+
+            return totalDiscountForNonPercentage;
+        }
+
+        public float GetDiscountForPercentage(DiscountResponse customerDiscount)
+        {
+            int percentageCount = 0; // Number Of Percentage Discounts Customer Qualifies For
+            float totalDiscountForPercentage = 0f;
+
+            // customer Type Discount ie Affilliate or Employee
+            if (customerDiscount != null && percentageCount == 0)
+            {
+                percentageCount++;
+                foreach (var order in Orders)
+                {
+                    if (order.OrderType.ToLower() != "groceries")
+                    {
+                        var discountedAmount = order.Amount * ((float)customerDiscount.DiscountPercent / 100);
+                        totalDiscountForPercentage += discountedAmount;
+                    }
+                }
+            }
+
+            // Loyalty Discount
+            if (Customer.GetAge() > 2 && percentageCount == 0)
+            {
+                percentageCount++;
+                foreach (var order in Orders)
+                {
+                    if (order.OrderType.ToLower() != "groceries")
+                    {
+                        var discountedAmount = order.Amount * ((float)customerDiscount.DiscountPercent / 100);
+                        totalDiscountForPercentage += discountedAmount;
+                    }
+                }
+            }
+            return totalDiscountForPercentage;
         }
     }
 

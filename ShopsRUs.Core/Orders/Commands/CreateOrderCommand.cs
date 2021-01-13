@@ -14,13 +14,13 @@ namespace ShopsRUs.Core.Orders.Commands
         public string OrderStatus { get; }
         public long CustomerId { get; }
 
-        public CreateOrderCommand(float amount, string itemName, string orderType, long customerId, string orserStatus)
+        public CreateOrderCommand(float amount, string itemName, string orderType, long customerId, string orderStatus)
         {
             Amount = amount;
             ItemName = itemName;
             OrderType = orderType;
             CustomerId = customerId;
-            OrderStatus = orserStatus;
+            OrderStatus = orderStatus;
         }
     }
 }

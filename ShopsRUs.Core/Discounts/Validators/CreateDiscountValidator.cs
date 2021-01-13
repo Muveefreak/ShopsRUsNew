@@ -13,8 +13,8 @@ namespace ShopsRUs.Core.Discounts.Validators
     {
         public CreateDiscountValidator()
         {
-            //List<string> percentageTypeConditions = new List<string>() { "Y", "N" };
-            //String percentageJoin = String.Join(",", percentageTypeConditions);
+            List<string> percentageTypeConditions = new List<string>() { "Y", "N" };
+            String percentageJoin = String.Join(",", percentageTypeConditions);
 
             RuleFor(x => x.DiscountType)
                 .NotEmpty().WithMessage("Discount Type is required.");
@@ -22,18 +22,18 @@ namespace ShopsRUs.Core.Discounts.Validators
             RuleFor(x => x.IsPercentageType)
                 .NotEmpty().WithMessage("Percentage Type is required.");
 
-            //RuleFor(x => x.IsPercentageType)
-            //    .Must(o => percentageJoin.Contains(o))
-            //    .WithMessage($"Please only pass: {percentageJoin} as Is Percentage Type.");
+            RuleFor(x => x.IsPercentageType)
+                .Must(x => percentageJoin.Contains(x))
+                .WithMessage($"Please only pass: {percentageJoin} as IsPercentageType.");
 
             RuleFor(x => x.DiscountPercentage)
                 .NotEmpty().When(x => x.IsPercentageType == "Y").WithMessage("Discount Percentage is required.")
-                .GreaterThan(-1).When(x => x.IsPercentageType == "Y").WithMessage("Discount Percentage must be greater than 0.")
+                .GreaterThan(0).When(x => x.IsPercentageType == "Y").WithMessage("Discount Percentage is required and must be greater than 0.")
                 .LessThan(100).When(x => x.IsPercentageType == "Y").WithMessage("Discount Percentage must be less than 100.");
 
             RuleFor(x => x.DiscountAmount)
-                .NotEmpty().When(x => x.IsPercentageType == "N").WithMessage("Discount Amount is required.")
-                .GreaterThan(-1).When(x => x.IsPercentageType == "N").WithMessage("Discount Amount must be greater than 0");
+                .NotNull().When(x => x.IsPercentageType == "N").WithMessage("Discount Amount is required.")
+                .GreaterThan(0).When(x => x.IsPercentageType == "N").WithMessage("Discount Amount is required and must be greater than 0");
 
         }
     }
