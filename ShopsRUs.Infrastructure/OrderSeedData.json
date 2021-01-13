@@ -1,0 +1,122 @@
+[
+  {
+    "ItemName": "Chambers",
+    "OrderType": "Groceries",
+    "OrderStatus": "U",
+    "Amount": 250
+  },
+  {
+    "ItemName": "Ida",
+    "OrderType": "Fashion",
+    "OrderStatus": "U",
+    "Amount": 100
+  },
+  {
+    "ItemName": "Fischer",
+    "OrderType": "Pharmacy",
+    "OrderStatus": "U",
+    "Amount": 60
+  },
+  {
+    "ItemName": "Maxine",
+    "OrderType": "Pharmacy",
+    "OrderStatus": "U",
+    "Amount": 250
+  },
+  {
+    "ItemName": "Earline",
+    "OrderType": "Pharmacy",
+    "OrderStatus": "U",
+    "Amount": 40
+  },
+  {
+    "ItemName": "Hyde",
+    "OrderType": "Groceries",
+    "OrderStatus": "U",
+    "Amount": 20
+  },
+  {
+    "ItemName": "Shauna",
+    "OrderType": "Books",
+    "OrderStatus": "U",
+    "Amount": 40
+  },
+  {
+    "ItemName": "Adela",
+    "OrderType": "Fashion",
+    "OrderStatus": "U",
+    "Amount": 10
+  },
+  {
+    "ItemName": "Donna",
+    "OrderType": "Pharmacy",
+    "OrderStatus": "U",
+    "Amount": 500
+  },
+  {
+    "ItemName": "Suarez",
+    "OrderType": "Groceries",
+    "OrderStatus": "U",
+    "Amount": 400
+  },
+  {
+    "ItemName": "Mccray",
+    "OrderType": "Electronics",
+    "OrderStatus": "U",
+    "Amount": 20
+  },
+  {
+    "ItemName": "Lori",
+    "OrderType": "Electronics",
+    "OrderStatus": "U",
+    "Amount": 20
+  },
+  {
+    "ItemName": "Glover",
+    "OrderType": "Books",
+    "OrderStatus": "U",
+    "Amount": 20
+  },
+  {
+    "ItemName": "Miranda",
+    "OrderType": "Groceries",
+    "OrderStatus": "U",
+    "Amount": 50
+  },
+  {
+    "ItemName": "Acosta",
+    "OrderType": "Pharmacy",
+    "OrderStatus": "U",
+    "Amount": 300
+  },
+  {
+    "ItemName": "Tami",
+    "OrderType": "Pharmacy",
+    "OrderStatus": "U",
+    "Amount": 400
+  },
+  {
+    "ItemName": "Wright",
+    "OrderType": "Pharmacy",
+    "OrderStatus": "U",
+    "Amount": 500
+  },
+  {
+    "ItemName": "Barker",
+    "OrderType": "Fashion",
+    "OrderStatus": "U",
+    "Amount": 10
+  },
+  {
+    "ItemName": "Kristy",
+    "OrderType": "Pharmacy",
+    "OrderStatus": "U",
+    "Amount": 400
+  },
+  {
+    "ItemName": "Shannon",
+    "OrderType": "Fashion",
+    "OrderStatus": "U",
+    "Amount": 500
+  }
+]

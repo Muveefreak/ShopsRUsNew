@@ -1,0 +1,28 @@
+version: "3.5"
+
+networks:
+  localdev:
+    name: localdev
+    
+services:
+  app:
+    build: .
+    restart: always
+    ports:
+      - "7000:80"
+    depends_on:
+      - db-server
+    environment:
+      - ConnectionStrings:ShopsRUsConnectionString=Server=192.168.8.104,1433;Database=ShopsRUs3.db;User=sa;Password=Sapassword123;
+    networks:
+      - localdev
+      
+  db-server:
+    image: microsoft/mssql-server-linux:2017-latest
+    container_name: db-server
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Sapassword123
+      - MSSQL_TCP_PORT=1433
+    ports:
+      - 1433:1433

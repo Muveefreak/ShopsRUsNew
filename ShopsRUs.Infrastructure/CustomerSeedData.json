@@ -1,0 +1,27 @@
+[
+  {
+    "CustomerName": "Cole",
+    "CustomerType": "Affiliate",
+    "CreatedDate": "2014-08-13T08:37:35"
+  },
+  {
+    "CustomerName": "Donovan",
+    "CustomerType": "Employee",
+    "CreatedDate": "2018-09-27T06:19:16"
+  },
+  {
+    "CustomerName": "Brady",
+    "CustomerType": "Employee",
+    "CreatedDate": "2019-04-13T04:23:06"
+  },
+  {
+    "CustomerName": "Shannon",
+    "CustomerType": "Employee",
+    "CreatedDate": "2020-09-30T07:20:13"
+  },
+  {
+    "CustomerName": "Cotton",
+    "CustomerType": "Employee",
+    "CreatedDate": "2018-04-14T10:56:44"
+  }
+]
