@@ -9,8 +9,8 @@ namespace ShopsRUs.Core.Discounts.Commands
     public class CreateDiscountCommand : IRequest<(DiscountResponse response, string message, bool isSuccess)>
     {
         public string DiscountType { get; }
-        public int DiscountAmount { get; }
-        public int DiscountPercentage { get; }
+        public int? DiscountAmount { get; }
+        public int? DiscountPercentage { get; }
         public string IsPercentageType { get; }
 
         public CreateDiscountCommand(int discountAmount, string discountType, int discountPercentage, string isPercentageType)

@@ -31,6 +31,9 @@ namespace ShopsRUs.Api
         }
         public void ConfigureServices(IServiceCollection services)
         {
+            AppSettings.LoyaltyYears = Convert.ToInt32(_config["AppSettings:LoyaltyYears"]);
+            AppSettings.ExemptedItems = _config["AppSettings:ExemptedItems"].ToLower().Split(',');
+
             services
                 .AddCorsRules()
                 .AddControllers()

@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using ShopsRUs.Core.Configuration;
 using ShopsRUs.Core.Customers.Queries;
 using ShopsRUs.Core.Customers.Responses;
 using ShopsRUs.Core.Discounts.Queries;
@@ -133,7 +134,7 @@ namespace ShopsRUs.Core.Orders.Services
                 percentageCount++;
                 foreach (var order in Orders)
                 {
-                    if (order.OrderType.ToLower() != "groceries")
+                    if (!AppSettings.ExemptedItems.Contains(order.OrderType.ToLower()))
                     {
                         var discountedAmount = order.Amount * ((float)customerDiscount.DiscountPercent / 100);
                         totalDiscountForPercentage += discountedAmount;
@@ -142,12 +143,12 @@ namespace ShopsRUs.Core.Orders.Services
             }
 
             // Loyalty Discount
-            if (Customer.GetAge() > 2 && percentageCount == 0)
+            if (Customer.GetAge() > AppSettings.LoyaltyYears && percentageCount == 0)
             {
                 percentageCount++;
                 foreach (var order in Orders)
                 {
-                    if (order.OrderType.ToLower() != "groceries")
+                    if (!AppSettings.ExemptedItems.Contains(order.OrderType.ToLower()))
                     {
                         var discountedAmount = order.Amount * ((float)customerDiscount.DiscountPercent / 100);
                         totalDiscountForPercentage += discountedAmount;

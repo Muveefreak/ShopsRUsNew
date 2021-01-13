@@ -15,4 +15,10 @@ namespace ShopsRUs.Core.Configuration
         public string ResponseDescription { get; set; }
         public object Data { get; set; }
     }
+
+    public static class AppSettings
+    {
+        public static int LoyaltyYears { get; set; }
+        public static string[] ExemptedItems { get; set; }
+    }
 }
